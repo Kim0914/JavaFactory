@@ -4,6 +4,7 @@ import com.example.core.discount.DiscountPolicy;
 import com.example.core.member.Member;
 import com.example.core.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,16 +13,16 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    // @Autowired // 자동으로 의존 관계 대입 (생성자 주입)
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
     /** 필드 주입 -> 권장 X
      * @Autowired private final MemberRepository memberRepository;
      * @Autowired private final DiscountPolicy discountPolicy
      */
-
-    @Autowired // 자동으로 의존 관계 대입 (생성자 주입)
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
 
     /** 수정자 주입
      * @Autowired
