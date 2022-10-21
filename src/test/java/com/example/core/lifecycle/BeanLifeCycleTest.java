@@ -7,6 +7,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.core.lifecycle.NetworkClient;
+
 public class BeanLifeCycleTest {
 
     @Test
@@ -19,6 +21,7 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig{
+//        @Bean(initMethod = "init", destroyMethod = "close")
         @Bean
         public NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient();
